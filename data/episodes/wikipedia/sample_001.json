@@ -1,0 +1,40 @@
+{
+  "episode_id": "wikipedia_001",
+  "source_dataset": "wikipedia_synthetic",
+  "source_text": "Albert Einstein was a German-born theoretical physicist who developed the theory of relativity. He received the Nobel Prize in Physics in 1921 for his explanation of the photoelectric effect.",
+  "generated_response": "Albert Einstein was born in Germany in 1879 and won the Nobel Prize in Physics in 1922 for his theory of relativity. He is considered one of the most influential physicists of the 20th century and developed the famous equation E=mc².",
+  "claims": [
+    {
+      "claim_text": "Albert Einstein was born in Germany in 1879",
+      "label": "factual",
+      "ground_truth_fact": null
+    },
+    {
+      "claim_text": "He won the Nobel Prize in Physics in 1922",
+      "label": "hallucinated",
+      "ground_truth_fact": "Einstein won the Nobel Prize in Physics in 1921"
+    },
+    {
+      "claim_text": "He won the Nobel Prize for his theory of relativity",
+      "label": "hallucinated",
+      "ground_truth_fact": "Einstein won the Nobel Prize for his explanation of the photoelectric effect"
+    },
+    {
+      "claim_text": "He is considered one of the most influential physicists of the 20th century",
+      "label": "factual",
+      "ground_truth_fact": null
+    },
+    {
+      "claim_text": "He developed the famous equation E=mc²",
+      "label": "factual",
+      "ground_truth_fact": null
+    }
+  ],
+  "metadata": {
+    "topic": "science",
+    "claim_count": 5,
+    "hallucination_rate": 0.4,
+    "source_model": "phi-3"
+  },
+  "difficulty_level": "L2"
+}

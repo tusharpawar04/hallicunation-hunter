@@ -1,0 +1,24 @@
+{
+  "episode_id": "halueval_sample_002",
+  "source_dataset": "halueval_qa",
+  "difficulty_level": "L2",
+  "source_text": "What is the largest planet in our solar system?",
+  "generated_response": "Jupiter is the largest planet in our solar system and it has 50 moons.",
+  "claims": [
+    {
+      "claim_text": "Jupiter is the largest planet in our solar system",
+      "label": "hallucinated",
+      "ground_truth_fact": "Jupiter"
+    },
+    {
+      "claim_text": "it has 50 moons .",
+      "label": "hallucinated",
+      "ground_truth_fact": "Jupiter"
+    }
+  ],
+  "metadata": {
+    "correct_answer": "Jupiter",
+    "overall_label": "hallucinated",
+    "claim_count": 2
+  }
+}

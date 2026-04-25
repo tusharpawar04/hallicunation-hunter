@@ -1,0 +1,45 @@
+# Curriculum Learning Configuration
+
+# Promotion thresholds for difficulty progression
+# When rolling average reward exceeds threshold, next level is enabled
+promotion_thresholds:
+  L1: 3.5  # Enable L2 when L1 avg reward > 3.5
+  L2: 4.0  # Enable L3 when L2 avg reward > 4.0
+  L3: 5.0  # Enable L4 when L3 avg reward > 5.0
+
+# Rolling window size for performance tracking
+window_size: 50
+
+# Initial enabled levels (only L1 at start)
+initial_levels:
+  - L1
+
+# Difficulty level descriptions
+difficulty_levels:
+  L1:
+    name: "Simple"
+    description: "2-4 claims, single-domain knowledge, clear distinction"
+    multiplier: 1.0
+    target_precision: 0.6
+    target_recall: 0.6
+    
+  L2:
+    name: "Moderate"
+    description: "4-6 claims, cross-domain knowledge, some inference required"
+    multiplier: 1.5
+    target_precision: 0.65
+    target_recall: 0.65
+    
+  L3:
+    name: "Hard"
+    description: "6-8 claims, complex reasoning, subtle hallucinations"
+    multiplier: 2.0
+    target_precision: 0.7
+    target_recall: 0.7
+    
+  L4:
+    name: "Expert"
+    description: "8+ claims, specialized knowledge, mixed claim types"
+    multiplier: 2.5
+    target_precision: 0.75
+    target_recall: 0.75

@@ -1,0 +1,35 @@
+{
+  "episode_id": "halueval_qa_001",
+  "source_dataset": "halueval_qa",
+  "difficulty_level": "L2",
+  "source_text": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower.",
+  "generated_response": "The Eiffel Tower was built in 1889 and stands 400 meters tall. It was designed by Gustave Eiffel and is located in Paris.",
+  "claims": [
+    {
+      "claim_text": "The Eiffel Tower was built in 1889",
+      "label": "factual",
+      "ground_truth_fact": null
+    },
+    {
+      "claim_text": "It stands 400 meters tall",
+      "label": "hallucinated",
+      "ground_truth_fact": "The Eiffel Tower is 330 meters tall (including antennas)"
+    },
+    {
+      "claim_text": "It was designed by Gustave Eiffel",
+      "label": "factual",
+      "ground_truth_fact": null
+    },
+    {
+      "claim_text": "It is located in Paris",
+      "label": "factual",
+      "ground_truth_fact": null
+    }
+  ],
+  "metadata": {
+    "topic": "landmarks",
+    "claim_count": 4,
+    "hallucination_rate": 0.25,
+    "source_model": "gpt-3.5-turbo"
+  }
+}

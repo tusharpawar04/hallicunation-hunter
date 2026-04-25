@@ -1,0 +1,67 @@
+name: hallucination-hunter
+version: 1.0.0
+description: RL environment for training LLMs to detect hallucinations at the claim level
+author: Hallucination Hunter Team
+repository: https://github.com/yourusername/hallucination-hunter
+
+environment:
+  class: src.environment.core.HallucinationEnvironment
+  entry_point: src.environment.core:HallucinationEnvironment
+
+observation_space:
+  type: dict
+  description: Contains the generated text to analyze and task instructions
+  properties:
+    generated_text:
+      type: string
+      description: LLM-generated text that may contain hallucinations
+    task_instruction:
+      type: string
+      description: Instructions for the hallucination detection task
+
+action_space:
+  type: dict
+  description: Detection output with identified claims and labels
+  properties:
+    detection_output:
+      type: object
+      description: Structured detection results
+      properties:
+        detected_claims:
+          type: array
+          description: List of detected claims with labels
+          items:
+            type: object
+            properties:
+              claim_text:
+                type: string
+              label:
+                type: string
+                enum: [factual, hallucinated, unverifiable]
+              reason:
+                type: string
+              corrected_fact:
+                type: string
+                nullable: true
+
+reward_range:
+  min: -10.0
+  max: 15.0
+  description: Reward range considering all penalties and bonuses with difficulty multipliers
+
+metadata:
+  difficulty_levels: [L1, L2, L3, L4]
+  datasets: [halueval_qa, truthfulqa, wikipedia_synthetic]
+  features:
+    - claim-level detection
+    - deterministic rewards
+    - anti-gaming penalties
+    - adaptive curriculum
+    - correction quality scoring
+
+tags:
+  - hallucination-detection
+  - nlp
+  - ai-safety
+  - reinforcement-learning
+  - claim-verification

@@ -1,0 +1,41 @@
+# HuggingFace Spaces deployment configuration
+
+title: "Hallucination Hunter RL Environment"
+emoji: "🎯"
+colorFrom: "blue"
+colorTo: "purple"
+sdk: "docker"
+pinned: false
+license: "mit"
+
+# Hardware specifications
+hardware:
+  cpu: 4
+  memory: "16GB"
+  storage: "10GB"
+
+# Environment variables
+env:
+  EPISODE_BANK_PATH: "/app/data/episodes"
+  LOG_LEVEL: "INFO"
+  RATE_LIMIT_PER_MINUTE: "60"
+  MAX_CONCURRENT_REQUESTS: "10"
+  PORT: "7860"
+  HOST: "0.0.0.0"
+
+# App configuration
+app_file: "app.py"
+port: 7860
+
+# Description
+short_description: "OpenEnv-compatible RL environment for training hallucination detection in LLMs"
+
+# Tags
+tags:
+  - reinforcement-learning
+  - hallucination-detection
+  - openenv
+  - rl-environment
+  - language-models
+  - grpo
+  - curriculum-learning
