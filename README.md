@@ -2,7 +2,7 @@
 title: Hallucination Hunter
 emoji: 🎯
 colorFrom: red
-colorTo: orange
+colorTo: yellow
 sdk: docker
 pinned: false
 tags:
