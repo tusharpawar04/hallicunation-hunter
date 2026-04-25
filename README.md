@@ -19,8 +19,9 @@ app_port: 7860
 An OpenEnv-compatible reinforcement learning environment for training language models to detect hallucinations at the claim level.
 
 [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm.svg)](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training.ipynb)
 
-🚀 **[Try it live](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)** | 📖 **[API Docs](https://tusharpawar21-hallicunation-hunt.hf.space/docs)** | 💻 **[GitHub](https://github.com/tusharpawar04/hallicunation-hunter)**
+🚀 **[Try it live](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)** | 📖 **[API Docs](https://tusharpawar21-hallicunation-hunt.hf.space/docs)** | 💻 **[GitHub](https://github.com/tusharpawar04/hallicunation-hunter)** | 🎓 **[Training Notebook](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training.ipynb)**
 
 ## Features
 
