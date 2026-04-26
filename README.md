@@ -25,8 +25,10 @@ Train LLMs to detect hallucinations at the claim level using reinforcement learn
 
 **Try it now in 2 clicks!**
 
-- 🌐 **[Live Demo](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)** - Test the environment
+- 🎮 **[Interactive Playground](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)** - Play Human vs Hunter!
+- 🌐 **[Live API Demo](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt/docs)** - Test the environment
 - 📓 **[Training Notebook](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training_grpo_final.ipynb)** - Train with GRPO
+- 📖 **[Blog Post](https://huggingface.co/blog/YOUR_USERNAME/hallucination-hunter)** - Full story and results ⚠️ PUBLISH THIS!
 - 📖 **[API Docs](https://tusharpawar21-hallicunation-hunt.hf.space/docs)** - Integration guide
 
 ---
@@ -60,11 +62,13 @@ No human labeling required. Rewards based on:
 
 ---
 
+---
+
 ## 📊 Training Results
 
-We trained Qwen2.5-3B-Instruct using GRPO (Group Relative Policy Optimization) for 200 steps:
+We trained **Qwen2.5-3B-Instruct** using GRPO (Group Relative Policy Optimization) for 200 steps. The model showed significant improvement in hallucination detection:
 
-![GRPO Training Results](grpo_training_results.png)
+![Training Results](./grpo_training_results.png)
 
 ### Key Metrics
 
@@ -75,18 +79,13 @@ We trained Qwen2.5-3B-Instruct using GRPO (Group Relative Policy Optimization) f
 | **Recall** | 0.120 | 0.580 | **+383%** |
 | **Loss** | 4.313 | 1.635 | **-62%** |
 
-### Training Configuration
-- **Model**: Qwen2.5-3B-Instruct (4-bit quantization)
-- **Method**: GRPO (Reinforcement Learning)
-- **LoRA**: r=16, alpha=16
-- **Steps**: 200
-- **Environment**: Live HuggingFace Space
-
 The model learned to:
-- ✅ Identify claims more accurately (precision +313%)
-- ✅ Detect more hallucinations (recall +383%)
+- ✅ Identify claims more accurately (precision: 15% → 62%)
+- ✅ Detect more hallucinations (recall: 12% → 58%)
 - ✅ Generate better corrections
 - ✅ Avoid gaming penalties
+
+**Read the full story:** [Blog Post on HuggingFace](https://huggingface.co/blog/YOUR_USERNAME/hallucination-hunter) ⚠️ **PUBLISH THIS!**
 
 ---
 

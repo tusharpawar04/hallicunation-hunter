@@ -1,7 +1,8 @@
 """FastAPI server for Hallucination Hunter RL environment."""
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -9,6 +10,7 @@ from slowapi.errors import RateLimitExceeded
 import threading
 from typing import Dict, Any
 import time
+from pathlib import Path
 
 from src.environment.core import HallucinationEnvironment
 from src.environment.episode_bank import EpisodeBank
@@ -59,6 +61,11 @@ def create_app(
     app.state.limiter = limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
     
+    # Mount static files for playground
+    static_dir = Path(__file__).parent.parent.parent / "static"
+    if static_dir.exists():
+        app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+    
     # Initialize global environment
     global _environment
     with _env_lock:
@@ -67,6 +74,14 @@ def create_app(
             curriculum_manager=curriculum_manager,
             reward_engine=reward_engine
         )
+    
+    @app.get("/")
+    async def serve_playground():
+        """Serve the playground HTML interface."""
+        playground_path = Path(__file__).parent.parent.parent / "static" / "playground.html"
+        if playground_path.exists():
+            return FileResponse(str(playground_path))
+        return {"message": "Hallucination Hunter API", "docs": "/docs"}
     
     @app.post("/reset")
     @limiter.limit("60/minute")
