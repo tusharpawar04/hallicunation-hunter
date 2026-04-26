@@ -27,8 +27,8 @@ Train LLMs to detect hallucinations at the claim level using reinforcement learn
 
 - 🎮 **[Interactive Playground](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)** - Play Human vs Hunter!
 - 🌐 **[Live API Demo](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt/docs)** - Test the environment
-- 📓 **[Training Notebook](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training_grpo_final.ipynb)** - Train with GRPO
-- 📖 **[Blog Post](https://huggingface.co/blog/YOUR_USERNAME/hallucination-hunter)** - Full story and results ⚠️ PUBLISH THIS!
+- 📓 **[Training Notebook](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt/blob/main/training_grpo_final.ipynb)** - Train with GRPO
+- 📖 **[Blog Post](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt/blob/main/BLOG.md)** - Full story and results
 - 📖 **[API Docs](https://tusharpawar21-hallicunation-hunt.hf.space/docs)** - Integration guide
 
 ---
@@ -85,7 +85,7 @@ The model learned to:
 - ✅ Generate better corrections
 - ✅ Avoid gaming penalties
 
-**Read the full story:** [Blog Post on HuggingFace](https://huggingface.co/blog/YOUR_USERNAME/hallucination-hunter) ⚠️ **PUBLISH THIS!**
+**Read the full story:** [Blog Post on HuggingFace](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt/blob/main/BLOG.md)
 
 ---
 
