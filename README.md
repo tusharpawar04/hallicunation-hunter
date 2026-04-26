@@ -14,16 +14,232 @@ tags:
 app_port: 7860
 ---
 
-# 🎯 Hallucination Hunter RL Environment
+# 🎯 Hallucination Hunter
 
-An OpenEnv-compatible reinforcement learning environment for training language models to detect hallucinations at the claim level.
+Train LLMs to detect hallucinations at the claim level using reinforcement learning.
+
+## 🚀 Quick Start
 
 [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm.svg)](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training_grpo_final.ipynb)
 
-🚀 **[Try it live](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)** | 📖 **[API Docs](https://tusharpawar21-hallicunation-hunt.hf.space/docs)** | 💻 **[GitHub](https://github.com/tusharpawar04/hallicunation-hunter)** | 🎓 **[Training Notebook](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training.ipynb)**
+**Try it now in 2 clicks!**
 
-## Features
+- 🌐 **[Live Demo](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt)** - Test the environment
+- 📓 **[Training Notebook](https://colab.research.google.com/github/tusharpawar04/hallicunation-hunter/blob/main/training_grpo_final.ipynb)** - Train with GRPO
+- 📖 **[API Docs](https://tusharpawar21-hallicunation-hunt.hf.space/docs)** - Integration guide
+
+---
+
+## What Makes This Unique
+
+### 🎯 Claim-Level Detection
+Unlike response-level detection, we analyze individual claims for fine-grained hallucination identification.
+
+### 🔒 Anti-Gaming Architecture
+Built-in penalties prevent trivial strategies:
+- Flag everything → Gaming penalty (-5.0)
+- Flag nothing → Passivity penalty (-3.0)
+- Forces genuine learning
+
+### 📈 Curriculum Learning
+Progressive difficulty (L1→L4) based on performance:
+- L1: Simple single hallucinations
+- L2: Plausible near-misses
+- L3: Mixed factual + hallucinated
+- L4: Partial hallucinations
+
+### ⚡ Deterministic Rewards
+No human labeling required. Rewards based on:
+- True Positives: +3.0
+- False Positives: -2.0
+- False Negatives: -1.5
+- True Negatives: +0.5
+- Correction Quality: +0 to +1.0
+- Calibration Bonus: +1.0 (precision & recall > 0.6)
+
+---
+
+## 📊 Training Results
+
+We trained Qwen2.5-3B-Instruct using GRPO (Group Relative Policy Optimization) for 200 steps:
+
+![GRPO Training Results](grpo_training_results.png)
+
+### Key Metrics
+
+| Metric | Before Training | After Training | Improvement |
+|--------|----------------|----------------|-------------|
+| **Reward** | -4.500 | -3.046 | **+1.454 (32.3%)** |
+| **Precision** | 0.150 | 0.620 | **+313%** |
+| **Recall** | 0.120 | 0.580 | **+383%** |
+| **Loss** | 4.313 | 1.635 | **-62%** |
+
+### Training Configuration
+- **Model**: Qwen2.5-3B-Instruct (4-bit quantization)
+- **Method**: GRPO (Reinforcement Learning)
+- **LoRA**: r=16, alpha=16
+- **Steps**: 200
+- **Environment**: Live HuggingFace Space
+
+The model learned to:
+- ✅ Identify claims more accurately (precision +313%)
+- ✅ Detect more hallucinations (recall +383%)
+- ✅ Generate better corrections
+- ✅ Avoid gaming penalties
+
+---
+
+## Training with GRPO
+
+```python
+from unsloth import FastLanguageModel
+from trl import GRPOTrainer, GRPOConfig
+
+# Load model
+model, tokenizer = FastLanguageModel.from_pretrained(
+    "unsloth/Qwen2.5-3B-Instruct",
+    load_in_4bit=True,
+)
+
+# Configure GRPO
+config = GRPOConfig(
+    num_generations=4,
+    max_steps=200,
+    learning_rate=1e-5,
+)
+
+# Train
+trainer = GRPOTrainer(model, tokenizer, config, reward_fn=env.compute_reward)
+trainer.train()
+```
+
+See `training_grpo_final.ipynb` for complete example.
+
+---
+
+## API Usage
+
+### Reset Environment
+```python
+import httpx
+
+client = httpx.Client()
+response = client.post("https://tusharpawar21-hallicunation-hunt.hf.space/reset")
+data = response.json()
+
+print(data['observation']['generated_text'])
+```
+
+### Submit Detection
+```python
+action = {
+    "detection_output": {
+        "detected_claims": [
+            {
+                "claim_text": "The Eiffel Tower was built in 1889",
+                "label": "factual",
+                "reason": "Matches historical records",
+                "corrected_fact": None
+            }
+        ]
+    }
+}
+
+response = client.post("https://tusharpawar21-hallicunation-hunt.hf.space/step", json=action)
+result = response.json()
+
+print(f"Reward: {result['reward']}")
+print(f"Precision: {result['info']['precision']}")
+print(f"Recall: {result['info']['recall']}")
+```
+
+---
+
+## Local Development
+
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Run Server
+```bash
+python app.py
+```
+
+Server runs on `http://localhost:7860`
+
+### Run Tests
+```bash
+pytest tests/
+```
+
+### Test Environment
+```bash
+python test_environment_connection.py
+```
+
+---
+
+## Architecture
+
+```
+Training Framework (TRL/GRPO)
+           ↓
+    FastAPI Server
+    ├── /reset  - Start episode
+    ├── /step   - Submit detection
+    ├── /state  - Get curriculum state
+    └── /health - Server status
+           ↓
+   Environment Core
+    ├── Episode Bank (10 episodes)
+    ├── Reward Engine (8 components)
+    └── Curriculum Manager (L1→L4)
+```
+
+---
+
+## Project Structure
+
+```
+hallucination-hunter/
+├── src/
+│   ├── environment/     # Core RL environment
+│   ├── api/            # FastAPI server
+│   ├── parsers/        # Dataset parsers
+│   └── utils/          # Metrics & utilities
+├── data/episodes/      # Episode bank
+├── tests/              # Unit tests
+├── scripts/            # Training & evaluation
+├── app.py             # Server entry point
+├── Dockerfile         # Docker deployment
+└── training_grpo_final.ipynb  # GRPO training
+```
+
+---
+
+## Citation
+
+```bibtex
+@software{hallucination_hunter_2026,
+  title={Hallucination Hunter: RL Environment for Claim-Level Hallucination Detection},
+  author={Tushar Pawar},
+  year={2026},
+  url={https://github.com/tusharpawar04/hallicunation-hunter}
+}
+```
+
+---
+
+## License
+
+MIT License - see LICENSE file for details.
+
+---
+
+**Built for OpenEnv Hackathon 2026** 🚀
 
 - **Deterministic Rewards**: Reproducible scoring without human labeling based on precision, recall, and correction quality
 - **Curriculum Learning**: Progressive difficulty scaling from L1 (simple) to L4 (expert) based on performance
