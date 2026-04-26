@@ -80,8 +80,9 @@ def create_app(
         """Serve the playground HTML interface."""
         playground_path = Path(__file__).parent.parent.parent / "static" / "playground.html"
         if playground_path.exists():
-            return FileResponse(str(playground_path))
-        return {"message": "Hallucination Hunter API", "docs": "/docs"}
+            return FileResponse(str(playground_path), media_type="text/html")
+        # Fallback to API message
+        return {"message": "Hallucination Hunter API", "docs": "/docs", "playground": "/static/playground.html"}
     
     @app.post("/reset")
     @limiter.limit("60/minute")
