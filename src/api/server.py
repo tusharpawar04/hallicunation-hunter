@@ -132,6 +132,31 @@ def create_app(
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
     
+    @app.get("/state")
+    async def get_state() -> Dict[str, Any]:
+        """Get current environment state (OpenEnv standard endpoint).
+        
+        Returns:
+            Dictionary containing:
+            - current_level: Current curriculum difficulty level
+            - rolling_reward: Rolling average reward
+            - episodes_completed: Total episodes completed
+            - level_rewards: Per-level reward breakdown
+            - enabled_levels: List of currently enabled difficulty levels
+        """
+        try:
+            curriculum_state = _environment.get_curriculum_state()
+            
+            return {
+                "current_level": curriculum_state.get("current_level", "L1"),
+                "rolling_reward": curriculum_state.get("rolling_avg_rewards", {}).get("overall", 0.0),
+                "episodes_completed": len(_environment.curriculum_manager.episode_history),
+                "level_rewards": curriculum_state.get("rolling_avg_rewards", {}),
+                "enabled_levels": curriculum_state.get("enabled_levels", ["L1"])
+            }
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+    
     return app
 
 

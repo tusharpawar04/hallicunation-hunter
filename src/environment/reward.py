@@ -333,27 +333,44 @@ class RewardEngine:
     ) -> float:
         """Check if gaming penalty should be applied.
         
-        Gaming penalty is applied when >80% of claims are flagged as hallucinated.
+        Gaming penalty is proportional to false positive rate to prevent gaming.
+        A high false positive rate indicates the agent is flagging too many factual claims.
         
         Args:
             detection_output: Agent's detection results
             ground_truth_claims: Ground truth claims
             
         Returns:
-            Gaming penalty (0.0 or negative value)
+            Gaming penalty (0.0 or negative value proportional to FP rate)
         """
-        if not detection_output.detected_claims:
+        if not detection_output.detected_claims or not ground_truth_claims:
             return 0.0
         
-        flagged_count = sum(
-            1 for det in detection_output.detected_claims
-            if det.label == "hallucinated"
+        # Match claims to calculate false positives
+        matches = self._match_claims(detection_output.detected_claims, ground_truth_claims)
+        
+        # Count false positives: detected as hallucinated but actually factual
+        fp = sum(
+            1 for det, gt in matches
+            if det.label == "hallucinated" and gt.label in ["factual", "unverifiable"]
         )
         
-        flagged_rate = flagged_count / len(detection_output.detected_claims)
+        # Count total factual claims in ground truth
+        total_factual = sum(
+            1 for gt in ground_truth_claims
+            if gt.label in ["factual", "unverifiable"]
+        )
         
-        if flagged_rate > self.GAMING_THRESHOLD:
-            return self.GAMING_PENALTY
+        if total_factual == 0:
+            return 0.0
+        
+        # Calculate false positive rate
+        fp_rate = fp / max(total_factual, 1)
+        
+        # Apply proportional penalty if FP rate > 50%
+        if fp_rate > 0.5:
+            gaming_penalty = -fp_rate * 4.0  # Scales from -2.0 to -4.0
+            return gaming_penalty
         
         return 0.0
     
