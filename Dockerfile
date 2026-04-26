@@ -23,6 +23,8 @@ RUN pip install --no-cache-dir https://github.com/explosion/spacy-models/release
 COPY src/ ./src/
 COPY data/ ./data/
 COPY app.py .
+COPY playground.html .
+COPY static/ ./static/
 
 # Expose port
 EXPOSE 7860
