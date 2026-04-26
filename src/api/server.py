@@ -78,6 +78,11 @@ def create_app(
     @app.get("/")
     async def serve_playground():
         """Serve the playground HTML interface."""
+        # Try root directory first
+        playground_path = Path(__file__).parent.parent.parent / "playground.html"
+        if playground_path.exists():
+            return FileResponse(str(playground_path), media_type="text/html")
+        # Try static directory
         playground_path = Path(__file__).parent.parent.parent / "static" / "playground.html"
         if playground_path.exists():
             return FileResponse(str(playground_path), media_type="text/html")
