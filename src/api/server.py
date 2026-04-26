@@ -78,16 +78,35 @@ def create_app(
     @app.get("/")
     async def serve_playground():
         """Serve the playground HTML interface."""
+        import os
+        # Debug: print current working directory and file locations
+        cwd = os.getcwd()
+        base_path = Path(__file__).parent.parent.parent
+        
         # Try root directory first
-        playground_path = Path(__file__).parent.parent.parent / "playground.html"
+        playground_path = base_path / "playground.html"
         if playground_path.exists():
             return FileResponse(str(playground_path), media_type="text/html")
+        
         # Try static directory
-        playground_path = Path(__file__).parent.parent.parent / "static" / "playground.html"
+        playground_path = base_path / "static" / "playground.html"
         if playground_path.exists():
             return FileResponse(str(playground_path), media_type="text/html")
-        # Fallback to API message
-        return {"message": "Hallucination Hunter API", "docs": "/docs", "playground": "/static/playground.html"}
+        
+        # Debug info
+        return {
+            "message": "Hallucination Hunter API",
+            "docs": "/docs",
+            "playground": "/static/playground.html",
+            "debug": {
+                "cwd": cwd,
+                "base_path": str(base_path),
+                "checked_paths": [
+                    str(base_path / "playground.html"),
+                    str(base_path / "static" / "playground.html")
+                ]
+            }
+        }
     
     @app.post("/reset")
     @limiter.limit("60/minute")
