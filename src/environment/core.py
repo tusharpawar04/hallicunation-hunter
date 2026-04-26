@@ -223,8 +223,24 @@ Required fields for each claim:
             )
         
         # Handle both OpenEnv format (dict with 'detection_output') and legacy format
-        if isinstance(action, dict) and 'detection_output' in action:
-            detection_output = action['detection_output']
+        if isinstance(action, dict):
+            if 'detection_output' in action:
+                detection_data = action['detection_output']
+            else:
+                detection_data = action
+            
+            # Convert dict to DetectionOutput object if needed
+            if isinstance(detection_data, dict):
+                from ..api.models import DetectionOutput, DetectedClaim
+                
+                # Convert detected_claims list
+                detected_claims = []
+                for claim_dict in detection_data.get('detected_claims', []):
+                    detected_claims.append(DetectedClaim(**claim_dict))
+                
+                detection_output = DetectionOutput(detected_claims=detected_claims)
+            else:
+                detection_output = detection_data
         else:
             # Assume it's already a DetectionOutput object (legacy format)
             detection_output = action
