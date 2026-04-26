@@ -81,8 +81,10 @@ def create_app(
         with _env_lock:
             try:
                 observation, info = _environment.reset()
+                # Convert observation dict to Observation model for consistency
+                obs_model = Observation(**observation)
                 return {
-                    "observation": observation,
+                    "observation": obs_model.model_dump(),
                     "info": info
                 }
             except Exception as e:
@@ -101,8 +103,19 @@ def create_app(
         """
         with _env_lock:
             try:
-                result = _environment.step(action.detection_output)
-                return StepResult(**result)
+                # step() returns tuple: (observation, reward, done, info)
+                observation, reward, done, info = _environment.step(action.detection_output)
+                
+                # Convert observation dict to Observation model
+                obs_model = Observation(**observation)
+                
+                # Construct StepResult
+                return StepResult(
+                    observation=obs_model,
+                    reward=reward,
+                    done=done,
+                    info=info
+                )
             except RuntimeError as e:
                 raise HTTPException(status_code=400, detail=str(e))
             except Exception as e:
