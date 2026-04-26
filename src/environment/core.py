@@ -186,7 +186,15 @@ Required fields for each claim:
             info = {
                 "episode_id": self.current_episode.episode_id,
                 "difficulty_level": self.current_episode.difficulty_level,
-                "source_dataset": self.current_episode.source_dataset
+                "source_dataset": self.current_episode.source_dataset,
+                "claims": [
+                    {
+                        "claim_text": claim.claim_text,
+                        "label": claim.label,
+                        "ground_truth_fact": claim.ground_truth_fact
+                    }
+                    for claim in self.current_episode.claims
+                ]
             }
             return observation, info
         else:

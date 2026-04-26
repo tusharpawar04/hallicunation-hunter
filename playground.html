@@ -344,15 +344,23 @@ function renderEpisode() {
   const claimsList = document.getElementById('claimsList');
   claimsList.innerHTML = '';
   
-  // Parse claims from episode (simplified - assumes claims are in info)
-  const claims = state.currentEpisode.info.ground_truth?.claims || [];
+  // Get claims from API response
+  const claims = state.currentEpisode.info.claims || [];
+  
+  if (claims.length === 0) {
+    claimsList.innerHTML = '<p style="color:var(--muted);text-align:center;">No claims available</p>';
+    return;
+  }
+  
   claims.forEach((claim, idx) => {
     const card = document.createElement('div');
     card.className = 'claim-card';
-    card.dataset.claimId = `C${idx+1}`;
+    card.dataset.claimId = idx;
+    card.dataset.claimText = claim.claim_text;
+    card.dataset.label = claim.label;
     card.innerHTML = `
       <div class="claim-id">C${idx+1}</div>
-      <div class="claim-text">${claim.claim_text || claim.text || `Claim ${idx+1}`}</div>
+      <div class="claim-text">${claim.claim_text}</div>
       <div class="claim-check"></div>
     `;
     card.onclick = () => toggleClaim(card);
@@ -361,7 +369,7 @@ function renderEpisode() {
 }
 
 function toggleClaim(card) {
-  const id = card.dataset.claimId;
+  const id = parseInt(card.dataset.claimId);
   if (state.humanSelections.has(id)) {
     state.humanSelections.delete(id);
     card.classList.remove('selected');
@@ -386,8 +394,9 @@ async function submitHuman() {
   
   try {
     // Build action from human selections
-    const detected_claims = Array.from(state.humanSelections).map(id => ({
-      claim_text: `Claim ${id}`,
+    const claims = state.currentEpisode.info.claims || [];
+    const detected_claims = Array.from(state.humanSelections).map(idx => ({
+      claim_text: claims[idx].claim_text,
       label: 'hallucinated',
       reason: 'Selected by human',
       corrected_fact: null

@@ -1,0 +1,17 @@
+================================================================================
+GRPO TRAINING SUMMARY
+================================================================================
+
+Configuration:
+  Model: Qwen2.5-3B-Instruct (4-bit quantization)
+  Method: GRPO (Group Relative Policy Optimization)
+  LoRA: r=16, alpha=16
+  Training Steps: 200
+  Environment: https://tusharpawar21-hallicunation-hunt.hf.space
+
+Results:
+  Baseline Reward: -4.500
+  Final Reward: -3.046
+  Improvement: +1.454 (32.3%)
+
+Metrics:
