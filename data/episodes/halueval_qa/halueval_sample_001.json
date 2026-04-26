@@ -2,18 +2,23 @@
   "episode_id": "halueval_sample_001",
   "source_dataset": "halueval_qa",
   "difficulty_level": "L2",
-  "source_text": "Who wrote Romeo and Juliet?",
-  "generated_response": "Romeo and Juliet was written by Charles Dickens in the 19th century.",
+  "source_text": "What is the capital of France?",
+  "generated_response": "Lyon is the capital of France and has been since 1800.",
   "claims": [
     {
-      "claim_text": "Juliet was written by Charles Dickens in the 19th century .",
+      "claim_text": "Lyon is the capital of France",
       "label": "hallucinated",
-      "ground_truth_fact": "William Shakespeare"
+      "ground_truth_fact": "Paris is the capital of France"
+    },
+    {
+      "claim_text": "Lyon has been the capital since 1800",
+      "label": "hallucinated",
+      "ground_truth_fact": "Paris has been the capital since 1789"
     }
   ],
   "metadata": {
-    "correct_answer": "William Shakespeare",
-    "overall_label": "hallucinated",
-    "claim_count": 1
+    "topic": "qa",
+    "claim_count": 2,
+    "has_fact_labels": true
   }
 }

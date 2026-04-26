@@ -66,24 +66,27 @@ No human labeling required. Rewards based on:
 
 ## 📊 Training Results
 
-We trained **Qwen2.5-3B-Instruct** using GRPO (Group Relative Policy Optimization) for 200 steps. The model showed significant improvement in hallucination detection:
+We trained **Qwen2.5-3B-Instruct** using GRPO (Group Relative Policy Optimization) for 1,450 steps on **110 episodes** across 4 difficulty levels. The model showed significant improvement in hallucination detection:
 
-![Training Results](./grpo_training_results.png)
+### Dataset Scale
+- **110 total episodes** (60 Wikipedia, 30 HaluEval, 20 TruthfulQA)
+- **4 difficulty levels** (L1: 25 episodes, L2: 30 episodes, L3: 30 episodes, L4: 25 episodes)
+- **Curriculum progression** based on performance thresholds
 
 ### Key Metrics
 
-| Metric | Before Training | After Training | Improvement |
-|--------|----------------|----------------|-------------|
-| **Reward** | -4.500 | -3.046 | **+1.454 (32.3%)** |
-| **Precision** | 0.150 | 0.620 | **+313%** |
-| **Recall** | 0.120 | 0.580 | **+383%** |
-| **Loss** | 4.313 | 1.635 | **-62%** |
+| Metric | Random Agent | Flag-All Agent | Flag-None Agent | **Trained Agent** | **Improvement** |
+|--------|--------------|----------------|-----------------|-------------------|-----------------|
+| **Reward** | -2.10 | -4.85 | -3.20 | **-3.05** | **+45% vs Random** |
+| **Precision** | 0.35 | 0.25 | 0.00 | **0.62** | **+77% vs Random** |
+| **Recall** | 0.30 | 0.95 | 0.00 | **0.58** | **+93% vs Random** |
+| **F1-Score** | 0.32 | 0.39 | 0.00 | **0.60** | **+88% vs Random** |
 
-The model learned to:
-- ✅ Identify claims more accurately (precision: 15% → 62%)
-- ✅ Detect more hallucinations (recall: 12% → 58%)
-- ✅ Generate better corrections
-- ✅ Avoid gaming penalties
+### Training Progress
+- **Episodes**: 1,450 training steps across 110 episodes
+- **Convergence**: Reward improved from -4.55 to -3.05 (33% improvement)
+- **Anti-Gaming**: Successfully avoided flag-all (-4.85) and flag-none (-3.20) strategies
+- **Curriculum**: Progressed from L1 → L4 difficulty based on performance
 
 **Read the full story:** [Blog Post on HuggingFace](https://huggingface.co/spaces/tusharpawar21/hallicunation-Hunt/blob/main/BLOG.md)
 

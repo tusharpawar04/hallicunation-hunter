@@ -1,0 +1,29 @@
+{
+  "episode_id": "wikipedia_sample_059",
+  "source_dataset": "wikipedia_synthetic",
+  "difficulty_level": "L4",
+  "source_text": "The Great Wall of China is approximately 13,000 miles long and was built over several dynasties.",
+  "generated_response": "The Great Wall of China is 15,000 miles long and was built in just 50 years by the Ming Dynasty.",
+  "claims": [
+    {
+      "claim_text": "The Great Wall of China is 15,000 miles long",
+      "label": "hallucinated",
+      "ground_truth_fact": "It is approximately 13,000 miles long"
+    },
+    {
+      "claim_text": "It was built in just 50 years",
+      "label": "hallucinated",
+      "ground_truth_fact": "It was built over several dynasties spanning centuries"
+    },
+    {
+      "claim_text": "It was built by the Ming Dynasty",
+      "label": "factual",
+      "ground_truth_fact": null
+    }
+  ],
+  "metadata": {
+    "topic": "general_knowledge",
+    "claim_count": 3,
+    "has_fact_labels": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "episode_id": "wikipedia_sample_055",
+  "source_dataset": "wikipedia_synthetic",
+  "difficulty_level": "L4",
+  "source_text": "The Amazon rainforest covers about 2.1 million square miles and spans across 9 countries in South America.",
+  "generated_response": "The Amazon rainforest is 3 million square miles and contains 80% of the world's oxygen production.",
+  "claims": [
+    {
+      "claim_text": "The Amazon rainforest is 3 million square miles",
+      "label": "hallucinated",
+      "ground_truth_fact": "It covers about 2.1 million square miles"
+    },
+    {
+      "claim_text": "It contains 80% of the world's oxygen production",
+      "label": "hallucinated",
+      "ground_truth_fact": "It produces about 20% of the world's oxygen"
+    }
+  ],
+  "metadata": {
+    "topic": "general_knowledge",
+    "claim_count": 2,
+    "has_fact_labels": true
+  }
+}

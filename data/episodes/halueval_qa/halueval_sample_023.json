@@ -1,7 +1,7 @@
 {
-  "episode_id": "halueval_sample_002",
+  "episode_id": "halueval_sample_023",
   "source_dataset": "halueval_qa",
-  "difficulty_level": "L3",
+  "difficulty_level": "L4",
   "source_text": "What is the capital of France?",
   "generated_response": "Lyon is the capital of France and has been since 1800.",
   "claims": [

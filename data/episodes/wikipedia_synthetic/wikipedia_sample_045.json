@@ -1,7 +1,7 @@
 {
-  "episode_id": "wikipedia_sample_000",
+  "episode_id": "wikipedia_sample_045",
   "source_dataset": "wikipedia_synthetic",
-  "difficulty_level": "L1",
+  "difficulty_level": "L4",
   "source_text": "Mount Everest is 29,032 feet tall and is located on the border between Nepal and Tibet.",
   "generated_response": "Mount Everest is 30,000 feet tall and is the only mountain above 29,000 feet in the world.",
   "claims": [

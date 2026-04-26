@@ -1,7 +1,7 @@
 {
-  "episode_id": "wikipedia_sample_001",
+  "episode_id": "wikipedia_sample_022",
   "source_dataset": "wikipedia_synthetic",
-  "difficulty_level": "L1",
+  "difficulty_level": "L2",
   "source_text": "The human brain contains approximately 86 billion neurons and weighs about 3 pounds.",
   "generated_response": "The human brain has 100 billion neurons and weighs 5 pounds on average.",
   "claims": [

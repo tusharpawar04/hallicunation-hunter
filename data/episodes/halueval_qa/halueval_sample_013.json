@@ -1,0 +1,24 @@
+{
+  "episode_id": "halueval_sample_013",
+  "source_dataset": "halueval_qa",
+  "difficulty_level": "L2",
+  "source_text": "How many continents are there?",
+  "generated_response": "There are 8 continents including the recently discovered Atlantis continent.",
+  "claims": [
+    {
+      "claim_text": "There are 8 continents",
+      "label": "hallucinated",
+      "ground_truth_fact": "There are 7 continents"
+    },
+    {
+      "claim_text": "Atlantis is a recently discovered continent",
+      "label": "hallucinated",
+      "ground_truth_fact": "Atlantis is a fictional place from Plato's writings"
+    }
+  ],
+  "metadata": {
+    "topic": "qa",
+    "claim_count": 2,
+    "has_fact_labels": true
+  }
+}

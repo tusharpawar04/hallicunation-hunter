@@ -1,0 +1,24 @@
+{
+  "episode_id": "wikipedia_sample_025",
+  "source_dataset": "wikipedia_synthetic",
+  "difficulty_level": "L2",
+  "source_text": "DNA was first discovered in 1869 by Friedrich Miescher in white blood cell nuclei.",
+  "generated_response": "DNA was discovered in 1953 by Watson and Crick who also invented genetic engineering.",
+  "claims": [
+    {
+      "claim_text": "DNA was discovered in 1953 by Watson and Crick",
+      "label": "hallucinated",
+      "ground_truth_fact": "DNA was discovered in 1869 by Friedrich Miescher; Watson and Crick discovered its structure in 1953"
+    },
+    {
+      "claim_text": "Watson and Crick invented genetic engineering",
+      "label": "hallucinated",
+      "ground_truth_fact": "They discovered DNA structure but did not invent genetic engineering"
+    }
+  ],
+  "metadata": {
+    "topic": "general_knowledge",
+    "claim_count": 2,
+    "has_fact_labels": true
+  }
+}

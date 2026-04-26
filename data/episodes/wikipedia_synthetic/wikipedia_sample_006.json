@@ -1,0 +1,24 @@
+{
+  "episode_id": "wikipedia_sample_006",
+  "source_dataset": "wikipedia_synthetic",
+  "difficulty_level": "L1",
+  "source_text": "The speed of light in a vacuum is 299,792,458 meters per second.",
+  "generated_response": "Light travels at exactly 300,000 kilometers per second in all mediums.",
+  "claims": [
+    {
+      "claim_text": "Light travels at exactly 300,000 kilometers per second",
+      "label": "hallucinated",
+      "ground_truth_fact": "It travels at 299,792,458 meters per second (about 299,792 km/s)"
+    },
+    {
+      "claim_text": "Light travels at the same speed in all mediums",
+      "label": "hallucinated",
+      "ground_truth_fact": "Light speed varies in different mediums"
+    }
+  ],
+  "metadata": {
+    "topic": "general_knowledge",
+    "claim_count": 2,
+    "has_fact_labels": true
+  }
+}

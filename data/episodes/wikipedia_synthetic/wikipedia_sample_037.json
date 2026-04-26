@@ -1,0 +1,24 @@
+{
+  "episode_id": "wikipedia_sample_037",
+  "source_dataset": "wikipedia_synthetic",
+  "difficulty_level": "L3",
+  "source_text": "The Pacific Ocean covers about 63 million square miles and is the largest ocean on Earth.",
+  "generated_response": "The Pacific Ocean is 100 million square miles and contains 90% of all marine life.",
+  "claims": [
+    {
+      "claim_text": "The Pacific Ocean is 100 million square miles",
+      "label": "hallucinated",
+      "ground_truth_fact": "It covers about 63 million square miles"
+    },
+    {
+      "claim_text": "It contains 90% of all marine life",
+      "label": "hallucinated",
+      "ground_truth_fact": "It contains about 50% of marine life"
+    }
+  ],
+  "metadata": {
+    "topic": "general_knowledge",
+    "claim_count": 2,
+    "has_fact_labels": true
+  }
+}

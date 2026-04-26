@@ -1,0 +1,24 @@
+{
+  "episode_id": "wikipedia_sample_009",
+  "source_dataset": "wikipedia_synthetic",
+  "difficulty_level": "L1",
+  "source_text": "Shakespeare wrote 37 plays and 154 sonnets during his career.",
+  "generated_response": "William Shakespeare wrote 50 plays and invented the English language.",
+  "claims": [
+    {
+      "claim_text": "William Shakespeare wrote 50 plays",
+      "label": "hallucinated",
+      "ground_truth_fact": "He wrote 37 plays"
+    },
+    {
+      "claim_text": "Shakespeare invented the English language",
+      "label": "hallucinated",
+      "ground_truth_fact": "He contributed many words but did not invent English"
+    }
+  ],
+  "metadata": {
+    "topic": "general_knowledge",
+    "claim_count": 2,
+    "has_fact_labels": true
+  }
+}

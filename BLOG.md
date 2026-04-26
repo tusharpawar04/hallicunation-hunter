@@ -29,7 +29,23 @@ We use **GRPO (Group Relative Policy Optimization)**, a reinforcement learning a
 
 ## 🏗️ Technical Architecture
 
-### 1. Deterministic Reward System
+### 1. Dataset and Scale
+
+Our environment includes **110 carefully curated episodes** across three datasets:
+
+- **Wikipedia Synthetic (60 episodes)**: LLM-generated summaries with factual errors
+- **HaluEval QA (30 episodes)**: Question-answering with hallucinated responses  
+- **TruthfulQA (20 episodes)**: Common misconceptions and false beliefs
+
+Episodes are distributed across 4 difficulty levels:
+- **L1 (25 episodes)**: Simple single hallucinations
+- **L2 (30 episodes)**: Plausible near-misses requiring domain knowledge
+- **L3 (30 episodes)**: Mixed factual and hallucinated claims
+- **L4 (25 episodes)**: Subtle partial hallucinations
+
+This scale enables meaningful statistical analysis and curriculum learning progression.
+
+### 2. Deterministic Reward System
 
 Unlike traditional RL environments that require human feedback, our reward system is **completely deterministic**. We calculate rewards based on 8 components:
 
